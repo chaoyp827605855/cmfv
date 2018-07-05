@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/cmfv.iml" filepath="$PROJECT_DIR$/cmfv.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cmfv_admin/cmfv_admin.iml" filepath="$PROJECT_DIR$/cmfv_admin/cmfv_admin.iml" />
+    </modules>
+  </component>
+</project>
