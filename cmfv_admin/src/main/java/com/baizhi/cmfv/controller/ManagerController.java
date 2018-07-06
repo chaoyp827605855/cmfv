@@ -25,18 +25,18 @@ public class ManagerController {
     private ManagerService managerService;
 
     @RequestMapping("/manager/login")
-    public String login(String mName , String mPassword ,String checkbox , HttpServletResponse response , HttpSession session , Map<String , Object> map) throws UnsupportedEncodingException {
-        Manager man = managerService.queryByName(mName);
+    public String login(String name , String password ,String checkbox , HttpServletResponse response , HttpSession session , Map<String , Object> map) throws UnsupportedEncodingException {
+        Manager man = managerService.queryByName(name);
         if(man == null) {
             map.put("loginError" , "账号或密码错误，请重新登录...");
-            return "login";
+            return "jsp/login";
         }
         System.out.println(checkbox + "++++++++++++++++++++++++++++");
         //判断登录是否成功
-        Manager manager = managerService.queryByIdAndPwd(mName,mPassword,man.getmSalt());
+        Manager manager = managerService.queryByIdAndPwd(name,password,man.getSalt());
         if(manager != null) {
             if("on".equals(checkbox)){
-                Cookie c1 = new Cookie("mName",URLEncoder.encode(mName ,"UTF-8"));
+                Cookie c1 = new Cookie("name",URLEncoder.encode(name ,"UTF-8"));
                 c1.setMaxAge(60*60*24*7);//设置Cookie生命周期（负数:不创建）、（零：浏览器关闭）、（正数：秒）
                 c1.setPath("/");
                 //2.添加Cookie到response中
@@ -44,10 +44,10 @@ public class ManagerController {
                 //3.响应（带着Cookie完成响应）
             }
             session.setAttribute("Manager" , manager );
-            return "index";
+            return "jsp/index";
         }
         map.put("loginError" , "账号或密码错误，请重新登录...");
-        return "login";
+        return "jsp/login";
     }
 
 

@@ -9,51 +9,60 @@ import java.io.Serializable;
  */
 public class Manager implements Serializable {
 
-    private String mId;
-    private String mName;
-    private String mSalt;
-    private String mStatus;
-    private String mPassword;
-
-    public String getmId() {
-        return mId;
-    }
-    public void setmId(String mId) {
-        this.mId = mId;
-    }
-    public String getmName() {
-        return mName;
-    }
-    public void setmName(String mName) {
-        this.mName = mName;
-    }
-    public String getmSalt() {
-        return mSalt;
-    }
-    public void setmSalt(String mSalt) {
-        this.mSalt = mSalt;
-    }
-    public String getmStatus() {
-        return mStatus;
-    }
-    public void setmStatus(String mStatus) {
-        this.mStatus = mStatus;
-    }
-    public String getmPassword() {
-        return mPassword;
-    }
-    public void setmPassword(String mPassword) {
-        this.mPassword = mPassword;
-    }
+    private String id;
+    private String name;
+    private String salt;
+    private String status;
+    private String password;
 
     @Override
     public String toString() {
         return "Manager{" +
-                "mId='" + mId + '\'' +
-                ", mName='" + mName + '\'' +
-                ", mSalt='" + mSalt + '\'' +
-                ", mStatus='" + mStatus + '\'' +
-                ", mPassword='" + mPassword + '\'' +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", salt='" + salt + '\'' +
+                ", status='" + status + '\'' +
+                ", password='" + password + '\'' +
                 '}';
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getSalt() {
+        return salt;
+    }
+
+    public void setSalt(String salt) {
+        this.salt = salt;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

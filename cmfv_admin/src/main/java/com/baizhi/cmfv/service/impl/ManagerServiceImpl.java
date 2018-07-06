@@ -31,8 +31,8 @@ public class ManagerServiceImpl implements ManagerService {
     */
     @Override
     @Transactional(readOnly = true , propagation = Propagation.SUPPORTS)
-    public Manager queryByName(String mName) {
-        return managerMapper.selectByName(mName);
+    public Manager queryByName(String name) {
+        return managerMapper.selectByName(name);
     }
 
     /**
@@ -44,9 +44,9 @@ public class ManagerServiceImpl implements ManagerService {
     */
     @Override
     @Transactional(readOnly = true , propagation = Propagation.SUPPORTS)
-    public Manager queryByIdAndPwd(String mName, String mPassword , String salt) {
-        mPassword = Md5Token.getInstance().getLongLongToken(mPassword + salt);
-        return managerMapper.selectManager(mName , mPassword);
+    public Manager queryByIdAndPwd(String name, String password , String salt) {
+        password = Md5Token.getInstance().getLongLongToken(password + salt);
+        return managerMapper.selectManager(name , password);
     }
 
     /**

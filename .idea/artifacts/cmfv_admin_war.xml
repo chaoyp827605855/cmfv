@@ -1,6 +1,6 @@
 <component name="ArtifactManager">
   <artifact type="war" name="cmfv_admin:war">
-    <output-path>$PROJECT_DIR$/cmfv_admin/target</output-path>
+    <output-path>C:/apache-tomcat-7.0.81/webapps</output-path>
     <root id="archive" name="cmfv_admin.war">
       <element id="artifact" artifact-name="cmfv_admin:war exploded" />
     </root>

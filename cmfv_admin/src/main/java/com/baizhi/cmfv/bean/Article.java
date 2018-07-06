@@ -10,70 +10,70 @@ import java.util.Date;
  */
 public class Article implements Serializable {
 
-    private String  aId;
-    private String  aName;
-    private String  aIntroduce;
-    private Date    aDate;
-    private String  aPicture;
-    private String  gId;
-
-    public String getaId() {
-        return aId;
-    }
-
-    public void setaId(String aId) {
-        this.aId = aId;
-    }
-
-    public String getaName() {
-        return aName;
-    }
-
-    public void setaName(String aName) {
-        this.aName = aName;
-    }
-
-    public String getaIntroduce() {
-        return aIntroduce;
-    }
-
-    public void setaIntroduce(String aIntroduce) {
-        this.aIntroduce = aIntroduce;
-    }
-
-    public Date getaDate() {
-        return aDate;
-    }
-
-    public void setaDate(Date aDate) {
-        this.aDate = aDate;
-    }
-
-    public String getaPicture() {
-        return aPicture;
-    }
-
-    public void setaPicture(String aPicture) {
-        this.aPicture = aPicture;
-    }
-
-    public String getgId() {
-        return gId;
-    }
-
-    public void setgId(String gId) {
-        this.gId = gId;
-    }
+    private String  id;
+    private String  name;
+    private String  introduce;
+    private Date    date;
+    private String  picture;
+    private String  gid;
 
     @Override
     public String toString() {
         return "Article{" +
-                "aId='" + aId + '\'' +
-                ", aName='" + aName + '\'' +
-                ", aIntroduce='" + aIntroduce + '\'' +
-                ", aDate=" + aDate +
-                ", aPicture='" + aPicture + '\'' +
-                ", gId='" + gId + '\'' +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", introduce='" + introduce + '\'' +
+                ", date=" + date +
+                ", picture='" + picture + '\'' +
+                ", gid='" + gid + '\'' +
                 '}';
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getIntroduce() {
+        return introduce;
+    }
+
+    public void setIntroduce(String introduce) {
+        this.introduce = introduce;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public String getPicture() {
+        return picture;
+    }
+
+    public void setPicture(String picture) {
+        this.picture = picture;
+    }
+
+    public String getGid() {
+        return gid;
+    }
+
+    public void setGid(String gid) {
+        this.gid = gid;
     }
 }

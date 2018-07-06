@@ -9,33 +9,43 @@ import java.io.Serializable;
  */
 public class Classify implements Serializable {
 
-    private String  cId;
-    private String  cName;
-    private String  cDifferent;
+    private String  id;
+    private String  name;
+    private String  different;
     private String  userId;
 
-    public String getcId() {
-        return cId;
+    @Override
+    public String toString() {
+        return "Classify{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", different='" + different + '\'' +
+                ", userId='" + userId + '\'' +
+                '}';
     }
 
-    public void setcId(String cId) {
-        this.cId = cId;
+    public String getId() {
+        return id;
     }
 
-    public String getcName() {
-        return cName;
+    public void setId(String id) {
+        this.id = id;
     }
 
-    public void setcName(String cName) {
-        this.cName = cName;
+    public String getName() {
+        return name;
     }
 
-    public String getcDifferent() {
-        return cDifferent;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public void setcDifferent(String cDifferent) {
-        this.cDifferent = cDifferent;
+    public String getDifferent() {
+        return different;
+    }
+
+    public void setDifferent(String different) {
+        this.different = different;
     }
 
     public String getUserId() {
@@ -44,15 +54,5 @@ public class Classify implements Serializable {
 
     public void setUserId(String userId) {
         this.userId = userId;
-    }
-
-    @Override
-    public String toString() {
-        return "Classify{" +
-                "cId='" + cId + '\'' +
-                ", cName='" + cName + '\'' +
-                ", cDifferent='" + cDifferent + '\'' +
-                ", userId='" + userId + '\'' +
-                '}';
     }
 }

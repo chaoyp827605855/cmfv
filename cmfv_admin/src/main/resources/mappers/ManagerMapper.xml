@@ -2,24 +2,24 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "../mybatis-3-mapper.dtd" >
 <mapper namespace="com.baizhi.cmfv.dao.ManagerMapper">
 
-    <!--<resultMap id="select" type="com.baizhi.cmfv.bean.Manager">-->
-        <!--<id column="m_id" property="mId"></id>-->
-        <!--<result column="m_name" property="mName"></result>-->
-        <!--<result column="m_salt" property="mSalt"></result>-->
-        <!--<result column="m_status" property="mStatus"></result>-->
-        <!--<result column="m_password" property="mPassword"></result>-->
-    <!--</resultMap>-->
+    <resultMap id="select" type="com.baizhi.cmfv.bean.Manager">
+        <id column="m_id" property="id"></id>
+        <result column="m_name" property="name"></result>
+        <result column="m_salt" property="salt"></result>
+        <result column="m_status" property="status"></result>
+        <result column="m_password" property="password"></result>
+    </resultMap>
 
-    <select id="selectByName" resultType="Manager">
-        select * from t_manager where m_name = #{mName}
+    <select id="selectByName" resultMap="select">
+        select * from t_manager where m_name = #{name}
     </select>
 
-    <select id="selectManager" resultType="Manager">
-        select * from t_manager where m_name = #{mName} and m_password = #{mPassword}
+    <select id="selectManager" resultMap="select">
+        select * from t_manager where m_name = #{name} and m_password = #{password}
     </select>
 
     <insert id="insertManager">
-        insert into t_manager values (#{mId},#{mName},#{mSalt},#{mStatus},#{mPassword})
+        insert into t_manager values (#{id},#{name},#{salt},#{status},#{password})
     </insert>
 
 </mapper>

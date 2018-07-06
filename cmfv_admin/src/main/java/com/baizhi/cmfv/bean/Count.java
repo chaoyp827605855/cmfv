@@ -14,8 +14,20 @@ public class Count implements Serializable {
     private String  couName;
     private Integer couNum;
     private Data    couDate;
-    private String  cId;
+    private String  cid;
     private String  userId;
+
+    @Override
+    public String toString() {
+        return "Count{" +
+                "couId='" + couId + '\'' +
+                ", couName='" + couName + '\'' +
+                ", couNum=" + couNum +
+                ", couDate=" + couDate +
+                ", cid='" + cid + '\'' +
+                ", userId='" + userId + '\'' +
+                '}';
+    }
 
     public String getCouId() {
         return couId;
@@ -49,12 +61,12 @@ public class Count implements Serializable {
         this.couDate = couDate;
     }
 
-    public String getcId() {
-        return cId;
+    public String getCid() {
+        return cid;
     }
 
-    public void setcId(String cId) {
-        this.cId = cId;
+    public void setCid(String cid) {
+        this.cid = cid;
     }
 
     public String getUserId() {
@@ -63,17 +75,5 @@ public class Count implements Serializable {
 
     public void setUserId(String userId) {
         this.userId = userId;
-    }
-
-    @Override
-    public String toString() {
-        return "Count{" +
-                "couId='" + couId + '\'' +
-                ", couName='" + couName + '\'' +
-                ", couNum=" + couNum +
-                ", couDate=" + couDate +
-                ", cId='" + cId + '\'' +
-                ", userId='" + userId + '\'' +
-                '}';
     }
 }

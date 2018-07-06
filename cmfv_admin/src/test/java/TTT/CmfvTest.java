@@ -1,7 +1,9 @@
 package TTT;
 
 import com.baizhi.cmfv.bean.Manager;
+import com.baizhi.cmfv.bean.Menu;
 import com.baizhi.cmfv.dao.ManagerMapper;
+import com.baizhi.cmfv.dao.MenuMapper;
 import com.baizhi.cmfv.service.ManagerService;
 import com.baizhi.cmfv.util.Md5Token;
 import com.baizhi.cmfv.util.RandomUtils;
@@ -12,6 +14,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.beans.ConstructorProperties;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -29,19 +32,5 @@ public class CmfvTest {
     @Autowired
     private ManagerService managerService;
 
-    @Test
-    public void fun1(){
-        Manager manager = managerMapper.selectManager("zs", "1");
-        System.out.println(manager);
-    }
-    @Test
-    public void fun2() {
 
-        Manager manager = new Manager();
-        manager.setmId(UUID.randomUUID().toString().replace("-",""));
-        manager.setmName("张三");
-        manager.setmSalt(RandomUtils.randomSalt(6));
-        manager.setmPassword(Md5Token.getInstance().getLongLongToken("123"+manager.getmSalt()));
-        managerService.addManager(manager);
-    }
 }

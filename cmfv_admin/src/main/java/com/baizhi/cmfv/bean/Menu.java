@@ -1,6 +1,7 @@
 package com.baizhi.cmfv.bean;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * @ClassName Menu
@@ -16,6 +17,7 @@ public class Menu implements Serializable{
     private String  menuIcon;
     private String  menuUrl;
     private Integer menuParentId;
+    private List<Menu> lists;
 
     @Override
     public String toString() {
@@ -26,7 +28,16 @@ public class Menu implements Serializable{
                 ", menuIcon='" + menuIcon + '\'' +
                 ", menuUrl='" + menuUrl + '\'' +
                 ", menuParentId=" + menuParentId +
+                ", lists=" + lists +
                 '}';
+    }
+
+    public List<Menu> getLists() {
+        return lists;
+    }
+
+    public void setLists(List<Menu> lists) {
+        this.lists = lists;
     }
 
     public Integer getId() {

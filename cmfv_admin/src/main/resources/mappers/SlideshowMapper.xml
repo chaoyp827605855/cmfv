@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "../mybatis-3-mapper.dtd" >
+<mapper namespace="com.baizhi.cmfv.dao.SlideshowMapper">
+
+    <resultMap id="select" type="Slideshow">
+        <id property="id" column="s_id"></id>
+        <result property="path" column="s_path"></result>
+        <result property="date" column="s_date"></result>
+        <result property="description" column="s_description"></result>
+        <result property="status" column="s_status"></result>
+    </resultMap>
+
+    <select id="selectPage" resultMap="select">
+        SELECT * FROM t_slideshow LIMIT #{begin} , #{end}
+    </select>
+
+    <select id="count" resultType="int">
+        select count(*) from t_slideshow
+    </select>
+
+    <insert id="insert">
+        insert into t_slideshow values (#{id},#{path},#{date},#{description},#{status})
+    </insert>
+
+    <update id="update">
+        update t_slideshow set  s_status = #{status} ,
+        <if test="path != null and path != ''">
+            s_path = #{path},
+        </if>
+        <if test="date != null and date != ''">
+            s_date = #{date},
+        </if>
+        <if test="description != null and description != ''">
+            s_description = #{description}
+        </if>
+        <where>
+            s_id = #{id}
+        </where>
+    </update>
+
+</mapper>

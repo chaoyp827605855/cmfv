@@ -82,7 +82,7 @@
         String name = "";
         javax.servlet.http.Cookie cs[] = request.getCookies();
         for(javax.servlet.http.Cookie c:cs){
-            if(c.getName().equals("mName")){
+            if(c.getName().equals("name")){
                 name = c.getValue();
                 name = java.net.URLDecoder.decode(name,"utf-8");
             }
@@ -104,7 +104,7 @@
                     用户名:
                 </th>
                 <td>
-                    <input id="mName" type="text"  name="mName" class="text" value="<%=name%>" maxlength="20"/>
+                    <input id="mName" type="text"  name="name" class="text" value="<%=name%>" maxlength="20"/>
                 </td>
             </tr>
             <tr>
@@ -112,7 +112,7 @@
                     密&nbsp;&nbsp;&nbsp;码:
                 </th>
                 <td>
-                    <input id="mPassword" type="password" name="mPassword" class="text" value="" maxlength="20" autocomplete="off"/>
+                    <input id="mPassword" type="password" name="password" class="text" value="" maxlength="20" autocomplete="off"/>
                 </td>
                 <span id="loginError" style="color: red">${loginError}</span>
             </tr>

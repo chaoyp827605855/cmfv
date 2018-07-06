@@ -9,8 +9,11 @@
 <script type="text/javascript" src="${pageContext.request.contextPath }/js/jquery.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath }/js/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath }/js/easyui-lang-zh_CN.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath }/js/menu.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath }/js/datagrid-detailview.js"></script>
 <script type="text/javascript">
-	
+
+
 </script>
 
 </head>
@@ -24,23 +27,9 @@
     </div>   
        
     <div data-options="region:'west',title:'导航菜单',split:true" style="width:220px;">
-    	<div id="aa" class="easyui-accordion" data-options="fit:true">
+    	<div id="menuPanel" class="easyui-accordion" data-options="fit:true">
 
-			<div id="aa" class="easyui-accordion" style="width:300px;height:200px;">
-				<div title="Title1" data-options="iconCls:'icon-save',selected:true" style="overflow:auto;padding:10px;">
-
-				</div>
-				<div title="Title2" data-options="iconCls:'icon-reload'" style="padding:10px;">
-					content2
-				</div>
-				<div title="Title3" data-options="iconCls:'icon-reload'" style="padding:10px;">
-					content3
-				</div>
-			</div>
-
-
-
-		</div>  
+		</div>
     </div>   
     <div data-options="region:'center'">
     	<div id="tt" class="easyui-tabs" data-options="fit:true,narrow:true,pill:true">   
