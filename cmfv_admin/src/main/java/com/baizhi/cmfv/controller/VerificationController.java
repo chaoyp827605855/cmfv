@@ -13,7 +13,7 @@ import java.io.OutputStream;
 
 /**
  * @ClassName VerificationController
- * @Description 类的作用
+ * @Description 验证信息
  * @Author Chao
  * @Date 2018/7/4 22:09
  */

@@ -9,7 +9,7 @@
 <body>
 <script type="application/javascript">
     $(function () {
-        $('#DataGridView').datagrid({
+        $('#DataGridViewSlideshow').datagrid({
             //title:'DataGrid - DetailView',
             width:500,
             height:250,
@@ -22,7 +22,7 @@
             singleSelect:true,
             pageSize:3,
             pageList:[3,5,7,9,11],
-            toolbar:"#search",
+            toolbar:"#searchSlideshow",
             url:"${pageContext.request.contextPath}/showSlideshowAll",
             columns:[[
                 {field:'id',title:'序号',width:80},
@@ -51,15 +51,16 @@
             }
         });
 //----------------------------------------------------------------------------------------------------------
-        $("#add").linkbutton({
+        $("#addSlideshow").linkbutton({
             text:"添加",
             iconCls: 'icon-add',
             width:80,
             height:30,
             onClick: function(){
+
                 /* alert('添加');*/
                 //var rowData = $("#DataGridView").datagrid("getSelected");
-                $("#dialog").dialog({
+                $("#dialogSlideshow").dialog({
                     title: "添加",
                     width: 500,
                     height: 350,
@@ -80,58 +81,62 @@
                                     }
                                 },
                                 success:function(data){
-                                    $("#dialog").dialog("close",{
+                                    $("#dialogSlideshow").dialog("close",{
                                     });
+                                    $("#DataGridViewSlideshow").datagrid("reload",{});
                                 }
                             });
                         }
                     },{
                         text:'关闭',
                         handler:function(){
-                            $("#dialog").dialog("close",{
+                            $("#dialogSlideshow").dialog("close",{
                             });
                         }
                     }],
                     onLoad:function(){
-                        $("#h1").text("用户信息");
+                        //$("#h1").text("信息");
                     }
                 });
             }
         });
 //----------------------------------------------------------------------------------------------------------
-        $("#delete").linkbutton({
+        $("#deleteSlideshow").linkbutton({
             text:"删除",
             iconCls: 'icon-cancel',
             width:80,
             height:30,
             onClick: function(){
                 /*  alert('删除');*/
-                var rowData = $("#DataGridView").datagrid("getSelected");
+                var rowData = $("#DataGridViewSlideshow").datagrid("getSelected");
                 if(rowData==null) {
                     alert("请选择一条数据...");
                 }else {
                     console.log(rowData.id);
                     $.ajax({
-                        url:"${pageContext.request.contextPath}/user/removeById",
+                        url:"${pageContext.request.contextPath}/removeById",
                         type:"POST",
-                        data:{"id":rowData.id}
+                        data:{"id":rowData.id},
+                        success:function () {
+                            $("#DataGridViewSlideshow").datagrid("reload",{});
+                        }
                     })
                 }
 
             }
         });
 //----------------------------------------------------------------------------------------------------------
-        $("#update").linkbutton({
+        $("#updateSlideshow").linkbutton({
             text:"修改",
             iconCls: 'icon-edit',
             width:80,
             height:30,
             onClick: function(){
-                var rowData = $("#DataGridView").datagrid("getSelected");
+                var rowData = $("#DataGridViewSlideshow").datagrid("getSelected");
                 if(rowData==null) {
                     alert("请选择一条数据...");
                 }else {
-                    $("#dialog").dialog({
+                    $("#dialogSlideshow").dialog({
                         title: rowData.username + " 的信息",
                         width: 500,
                         height: 350,
@@ -154,16 +159,16 @@
                                         // return false to prevent submit;
                                     },
                                     success:function(data){
-                                        $("#dialog").dialog("close",{
-
+                                        $("#dialogSlideshow").dialog("close",{
                                         });
+                                        $("#DataGridViewSlideshow").datagrid("reload",{});
                                     }
                                 });
                             }
                         },{
                             text:'关闭',
                             handler:function(){
-                                $("#dialog").dialog("close",{
+                                $("#dialogSlideshow").dialog("close",{
 
                                 });
                             }
@@ -182,29 +187,20 @@
 
 
 
-
-
-
-
     })
 </script>
 
 
 
-<table id="DataGridView"></table>
+<table id="DataGridViewSlideshow"></table>
 
-<div id="search">
+<div id="searchSlideshow">
 
-    <a id="add"></a>
-    <a id="delete"></a>
-    <a id="update"></a>
+    <a id="addSlideshow"></a>
+    <a id="deleteSlideshow"></a>
+    <a id="updateSlideshow"></a>
 
-    <%--<input id="ss"></input>--%>
-    <%--<div id="mm" style="width:120px">--%>
-        <%--<div data-options="name:'id',iconCls:'icon-ok'">ID</div>--%>
-        <%--<div data-options="name:'username'">UserName</div>--%>
-    <%--</div>--%>
 </div>
 
-<div id="dialog"></div>
+<div id="dialogSlideshow"></div>
 </body>

@@ -22,10 +22,6 @@
         <label for="description">轮播图描述:</label>
         <input class="easyui-textbox" data-options="required:true" name="description"  style="width:300px;height:40px;">
     </div>
-    <%--<div style="margin-left: 40px;">--%>
-        <%--<label for="status">轮播图状态:</label>--%>
-        <%--<input class="easyui-textbox" data-options="required:true" prompt="status" name="status"  style="width:300px;height:40px;">--%>
-    <%--</div>--%>
     <div style="margin-left: 40px;">
         <label for="status">轮播图状态:</label>
         <input class="easyui-switchbutton" data-options="onText:'展示中',offText:'未展示'" name="status" style="width:300px;height:40px;">
@@ -34,7 +30,7 @@
 
     <div style="margin-left: 40px;">
         <label for="slideshowFile">上传轮播图:</label>
-        <input class="easyui-filebox" name="slideshowFile"  style="width:300px;height:40px;">
+        <input class="easyui-filebox" id="slideshowFile" name="slideshowFile"  style="width:300px;height:40px;">
     </div>
 
     <a id="btnff"></a>

@@ -9,7 +9,10 @@
         <webroots>
           <root url="file://$MODULE_DIR$/src/main/webapp" relative="/" />
         </webroots>
-        <sourceRoots />
+        <sourceRoots>
+          <root url="file://$MODULE_DIR$/src/main/java" />
+          <root url="file://$MODULE_DIR$/src/main/resources" />
+        </sourceRoots>
       </configuration>
     </facet>
     <facet type="Spring" name="Spring">
@@ -62,5 +65,13 @@
     <orderEntry type="library" name="Maven: log4j:log4j:1.2.9" level="project" />
     <orderEntry type="library" name="Maven: org.slf4j:slf4j-api:1.6.6" level="project" />
     <orderEntry type="library" name="Maven: org.slf4j:slf4j-log4j12:1.6.6" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.poi:poi-ooxml:3.14-beta1" level="project" />
+    <orderEntry type="library" name="Maven: com.github.virtuald:curvesapi:1.03" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.poi:poi-ooxml-schemas:3.14-beta1" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.xmlbeans:xmlbeans:2.6.0" level="project" />
+    <orderEntry type="library" name="Maven: stax:stax-api:1.0.1" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.poi:poi:3.14-beta1" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.httpcomponents:httpclient:4.5.2" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.httpcomponents:httpcore:4.4.4" level="project" />
   </component>
 </module>

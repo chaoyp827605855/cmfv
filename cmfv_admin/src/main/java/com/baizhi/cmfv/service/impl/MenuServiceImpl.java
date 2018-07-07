@@ -22,7 +22,13 @@ public class MenuServiceImpl implements MenuService {
 
     @Autowired
     private MenuMapper menuMapper;
-
+    
+    /**
+    * @Description  菜单的查询
+    * @Author       chao
+    * @Date         2018/7/5 18:58 
+    * @Param        参数的作用
+    */
     @Override
     @Transactional(readOnly = true , propagation = Propagation.SUPPORTS)
     public List<Menu> queryAll() {

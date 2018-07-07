@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @ClassName ManagerServiceImpl
- * @Description 类的作用
+ * @Description 管理员的功能
  * @Author Chao
  * @Date 2018/7/4 14:18
  */
@@ -27,7 +27,6 @@ public class ManagerServiceImpl implements ManagerService {
     * @Author       chao
     * @Date         2018/7/4 19:07
     * @Param        参数的作用
-    * @Exception    抛出的异常
     */
     @Override
     @Transactional(readOnly = true , propagation = Propagation.SUPPORTS)
@@ -40,7 +39,6 @@ public class ManagerServiceImpl implements ManagerService {
     * @Author       chao
     * @Date         2018/7/4 19:08
     * @Param        参数的作用
-    * @Exception    抛出的异常
     */
     @Override
     @Transactional(readOnly = true , propagation = Propagation.SUPPORTS)
@@ -54,7 +52,6 @@ public class ManagerServiceImpl implements ManagerService {
     * @Author       chao
     * @Date         2018/7/4 19:08
     * @Param        参数的作用
-    * @Exception    抛出的异常
     */
     @Override
     public void addManager(Manager manager) {

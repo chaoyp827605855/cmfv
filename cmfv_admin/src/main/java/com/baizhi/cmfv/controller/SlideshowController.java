@@ -19,7 +19,7 @@ import java.util.UUID;
 
 /**
  * @ClassName SlideshowController
- * @Description 类的作用
+ * @Description 轮播图的功能实现
  * @Author Chao
  * @Date 2018/7/5 17:36
  */
@@ -30,49 +30,70 @@ public class SlideshowController {
     private SlideshowService slideshowService;
 
 
-    @RequestMapping("uploadSlideshow")
-    public String uploadSlideshow(String description , String status ,  MultipartFile slideshowFile , HttpSession session) throws IOException {
-        //获得文件夹名称
-        String realPath = session.getServletContext().getRealPath("\\");
+    @RequestMapping("/uploadSlideshow")
+    @ResponseBody
+    public void uploadSlideshow(String description , String status ,  MultipartFile slideshowFile , HttpSession session) throws IOException {
+        if(!slideshowFile.isEmpty()) {
+            //获得文件夹名称
+            String realPath = session.getServletContext().getRealPath("\\");
 
-        System.out.println("------------------"+realPath);
-        String newPath = realPath.substring(0,realPath.lastIndexOf("\\"));
-        String uploadPath = newPath.substring(0,newPath.lastIndexOf("\\"))+"\\upload";
-        System.out.println("------------------"+uploadPath);
+            System.out.println("------------------" + realPath);
+            String newPath = realPath.substring(0, realPath.lastIndexOf("\\"));
+            String uploadPath = newPath.substring(0, newPath.lastIndexOf("\\")) + "\\upload";
+            System.out.println("------------------" + uploadPath);
 
-        String sId = UUID.randomUUID().toString().replace("-","");
-        //获取文件的名字
-        String oldName = slideshowFile.getOriginalFilename();
-        //获取文件的后缀名
-        String suffix = oldName.substring(oldName.lastIndexOf("."));
-        // 转存文件到指定的路径
-        String path = uploadPath+"/"+sId + suffix;
-        slideshowFile.transferTo(new File(path));
+            String sId = UUID.randomUUID().toString().replace("-", "");
+            //获取文件的名字
+            String oldName = slideshowFile.getOriginalFilename();
+            //获取文件的后缀名
+            String suffix = oldName.substring(oldName.lastIndexOf("."));
+            // 转存文件到指定的路径
+            String path = uploadPath + "/" + sId + suffix;
+            slideshowFile.transferTo(new File(path));
 
-        Slideshow slideshow = new Slideshow();
-        slideshow.setId(sId);
-        slideshow.setPath("upload"+"/"+sId + suffix);
-        slideshow.setDate(new Date());
-        slideshow.setDescription(description);
-        slideshow.setStatus(status);
+            Slideshow slideshow = new Slideshow();
+            slideshow.setId(sId);
+            slideshow.setPath("upload" + "/" + sId + suffix);
+            slideshow.setDate(new Date());
+            slideshow.setDescription(description);
+            slideshow.setStatus(status);
 
-        slideshowService.add(slideshow);
+            slideshowService.add(slideshow);
+        }
 
-        return "jsp/login";
     }
 
     @RequestMapping("/showSlideshowAll")
     @ResponseBody
     public Map<String , Object> showSlideshowAll(int page , int rows){
-        Map<String, Object> map = slideshowService.queryPage(page, rows);
-        return map;
+        return slideshowService.queryPage(page, rows);
     }
 
     @RequestMapping("/modify")
-    public String modify(Slideshow slideshow){
-        System.out.println("-----------------modify-------------"+slideshow);
+    @ResponseBody
+    public void modify(Slideshow slideshow , MultipartFile slideshowFile , HttpSession session) throws IOException {
+        if(!slideshowFile.isEmpty()) {
+            //获得文件夹名称
+            String realPath = session.getServletContext().getRealPath("\\");
+
+            System.out.println("------------------"+realPath);
+            String newPath = realPath.substring(0,realPath.lastIndexOf("\\"));
+            String uploadPath = newPath.substring(0,newPath.lastIndexOf("\\"))+"\\upload";
+            System.out.println("------------------"+uploadPath);
+
+            String sId = UUID.randomUUID().toString().replace("-","");
+            //获取文件的名字
+            String oldName = slideshowFile.getOriginalFilename();
+            //获取文件的后缀名
+            String suffix = oldName.substring(oldName.lastIndexOf("."));
+            // 转存文件到指定的路径
+            String path = uploadPath+"/"+sId + suffix;
+            slideshowFile.transferTo(new File(path));
+
+            slideshow.setPath("upload"+"/"+sId + suffix);
+        }
+        slideshow.setDate(new Date());
         slideshowService.modify(slideshow);
-        return null;
     }
 
 }

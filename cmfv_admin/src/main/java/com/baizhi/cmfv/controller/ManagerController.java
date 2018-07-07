@@ -14,7 +14,7 @@ import java.util.Map;
 
 /**
  * @ClassName ManagerController
- * @Description 类的作用
+ * @Description 管理员的功能实现
  * @Author Chao
  * @Date 2018/7/4 13:54
  */

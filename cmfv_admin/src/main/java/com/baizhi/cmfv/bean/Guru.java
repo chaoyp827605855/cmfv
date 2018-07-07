@@ -10,9 +10,9 @@ import java.io.Serializable;
 public class Guru implements Serializable {
 
     private String  id;
-    private String  religionName;
+    private String  religionName;   //法名
     private String  picture;
-    private String  description;
+    private String  description;    //描述
 
     @Override
     public String toString() {

@@ -11,7 +11,7 @@ import java.util.List;
 
 /**
  * @ClassName MenuController
- * @Description 类的作用
+ * @Description 分类的功能实现
  * @Author Chao
  * @Date 2018/7/5 11:07
  */
