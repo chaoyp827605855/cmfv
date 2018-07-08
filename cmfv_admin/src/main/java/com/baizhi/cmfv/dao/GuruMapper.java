@@ -17,9 +17,12 @@ public interface GuruMapper {
 
     public int count(@Param("key") String key , @Param("value") String value);
 
-    int insert(Guru guru);
+    public void insertBatch(@Param("list") List<Guru> list);
 
+    public List<Guru> findAll();
+
+
+    //运用POI 实现 excel表格中的数据导入、导出
     Guru selectByPrimaryKey(String id);
-
     int updateByPrimaryKey(Guru guru);
 }

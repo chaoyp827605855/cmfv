@@ -10,15 +10,14 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.InputStream;
-import java.sql.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 /**
  * @ClassName GuruServiceImpl
@@ -84,16 +83,41 @@ public class GuruServiceImpl implements GuruService {
     }
 
     /**
-    * @Description  用于excel表格中的数据批量插入
+    * @Description  运用easyPOI 实现 excel表格中的数据批量插入
+    * @Author       chao
+    * @Date         2018/7/8 17:50
+    * @Param        参数的作用
+    */
+    @Override
+    public void addGurus(List<Guru> gurus) {
+        guruMapper.insertBatch(gurus);
+    }
+
+    @Override
+    @Transactional(readOnly = true , propagation = Propagation.SUPPORTS)
+    public List<Guru> queryAll() {
+        return guruMapper.findAll();
+    }
+
+
+
+
+
+
+
+
+
+
+    /**
+    * @Description  运用POI 实现 excel表格中的数据批量插入
     * @Author       chao
     * @Date         2018/7/7 19:44
     * @Param        参数的作用
-    * @Exception    抛出的异常
     */
     @Override
     public String ajaxUploadExcel(HttpServletRequest request, HttpServletResponse response) {
         MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
-        //获取上传的文件
+        //从请求中获取上传的文件
         MultipartFile file = multipartRequest.getFile("upfile");
         //判断文件是否为null
         if (file.isEmpty()) {
@@ -122,30 +146,27 @@ public class GuruServiceImpl implements GuruService {
         for (int i = 0; i < listob.size(); i++) {
             List<Object> lo = listob.get(i);
             Guru guru = new Guru();
-            Guru j = null;
-
-            System.out.println("-----------  " + i + "  ----------------" + String.valueOf(lo.get(0)) + "\t" +
-                    String.valueOf(lo.get(1)) + "\t" + String.valueOf(lo.get(2)) + "\t" + String.valueOf(lo.get(3)));
-
-            try {
-                //查询当前行对象是否存在
-                j = guruMapper.selectByPrimaryKey(String.valueOf(lo.get(0)));
-            } catch (NumberFormatException e) {
-                // TODO Auto-generated catch block
-                System.out.println("没有新增");
-            }
-            guru.setId((String.valueOf(lo.get(0))));
+//            Guru verificationGuru = null;
+//            try {
+//                //查询当前行对象是否存在
+//                verificationGuru = guruMapper.selectByPrimaryKey(String.valueOf(lo.get(0)));
+//            } catch (NumberFormatException e) {
+//                System.out.println("------没有新增------");
+//            }
+            guru.setId(UUID.randomUUID().toString().replace("-",""));
             guru.setReligionName(String.valueOf(lo.get(1)));
             guru.setPicture(String.valueOf(lo.get(2)));
             guru.setDescription(String.valueOf(lo.get(3)));
             //如果当前行对象存在，则对数据库中的该对象进行跟新覆盖 ，否则，进行插入
-            if (j == null) {
-                guruMapper.insert(guru);
-            } else {
-                guruMapper.updateByPrimaryKey(guru);
-            }
+//            if (verificationGuru == null) {
+//                guruMapper.insert(guru);
+//            } else {
+//                guruMapper.updateByPrimaryKey(guru);
+//            }
+            guruMapper.insertOne(guru);
         }
-        return "文件导入成功！";
+        String improtSuccess = "文件导入成功!";
+        return improtSuccess;
     }
 
 }

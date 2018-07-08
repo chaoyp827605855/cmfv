@@ -2,14 +2,10 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "../mybatis-3-mapper.dtd" >
 <mapper namespace="com.baizhi.cmfv.dao.GuruMapper">
 
-    <insert id="insert">
-        insert into t_guru (g_id, g_religionName,g_picture, g_description)
-        values (#{id,jdbcType=INTEGER}, #{religionName,jdbcType=VARCHAR}, #{picture,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR})
-    </insert>
 
     <insert id="insertOne">
-        insert into t_guru values (#{id},#{religionName},#{picture},#{description})
-
+        insert into t_guru (g_id, g_religionName,g_picture, g_description)
+        values (#{id,jdbcType=INTEGER}, #{religionName,jdbcType=VARCHAR}, #{picture,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR})
     </insert>
 
     <delete id="deleteById">
@@ -60,6 +56,25 @@
             </if>
         </where>
     </select>
+
+
+    <insert id="insertBatch">
+        insert into t_guru
+        values
+        <foreach collection="list" separator="," item="guru">
+            (#{guru.id,jdbcType=INTEGER}, #{guru.religionName,jdbcType=VARCHAR}, #{guru.picture,jdbcType=VARCHAR}, #{guru.description,jdbcType=VARCHAR})
+        </foreach>
+    </insert>
+
+    <select id="findAll" resultMap="select">
+        select * from t_guru
+    </select>
+
+
+
+
+
+
 
 
     <select id="selectByPrimaryKey" resultMap="select" parameterType="java.lang.String" >

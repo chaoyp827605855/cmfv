@@ -1,18 +1,26 @@
 package com.baizhi.cmfv.controller;
 
+import cn.afterturn.easypoi.excel.ExcelExportUtil;
+import cn.afterturn.easypoi.excel.ExcelImportUtil;
+import cn.afterturn.easypoi.excel.entity.ExportParams;
+import cn.afterturn.easypoi.excel.entity.ImportParams;
 import com.baizhi.cmfv.bean.Guru;
 import com.baizhi.cmfv.service.GuruService;
+import org.apache.poi.ss.usermodel.Workbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -103,6 +111,69 @@ public class GuruController {
         return guruService.queryByPage(page,rows,key,value);
     }
 
+
+    /**
+     * @Description  运用easyPOI 实现 excel表格中的数据批量插入
+     * @Author       chao
+     * @Date         2018/7/8 17:50
+     * @Param        参数的作用
+     */
+    @RequestMapping("/improtExcel")
+    @ResponseBody
+    public void improtExcel(MultipartFile upfile){
+        // 参数一：输入流
+        // 参数二：pojo
+        // 参数三：导入参数对象
+        try {
+            ImportParams importParams = new ImportParams();
+            List<Guru> gurus = ExcelImportUtil.importExcel(upfile.getInputStream(), Guru.class, importParams);
+            //将表格的中数据id 变更为UUID
+            for (Guru guru : gurus) {
+                guru.setId(UUID.randomUUID().toString().replace("-",""));
+            }
+            guruService.addGurus(gurus);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    /**
+     * 注意事项：下载文件的时候不能使用异步请求 ajax
+     *
+     * dataType:json
+     *          xml
+     *          不支持stream类型
+     *
+     * @param resp
+     * @throws IOException
+     */
+    @RequestMapping("/exportExcel")
+    public void exportExcel(HttpServletResponse resp) throws IOException {
+        List<Guru> gurus = guruService.queryAll();
+        // Excel文件
+        Workbook workbook = ExcelExportUtil.exportExcel(new ExportParams("c118", "上师信息表"), Guru.class, gurus);
+        ServletOutputStream out = resp.getOutputStream();
+        // 文件下载 设置响应头
+        // 注意：响应头 默认使用的编码格式iso-8859-1
+
+        String fileName = new String("上师信息.xls".getBytes(), "iso-8859-1");
+
+        resp.setContentType("application/vnd.ms-excel"); //响应类型  text/html  application/json
+        resp.setHeader("content-disposition","attachment;fileName="+fileName);
+        // 导出 文件下载的方式
+        workbook.write(out);
+        out.close();
+    }
+
+
+
+    /**
+     * @Description  运用POI 实现 excel表格中的数据批量插入
+     * @Author       chao
+     * @Date         2018/7/8 17:50
+     * @Param        参数的作用
+     */
     @RequestMapping(value="/ajaxUpload")
     @ResponseBody
     public String ajaxUploadExcel(HttpServletRequest request,HttpServletResponse response) throws Exception {
