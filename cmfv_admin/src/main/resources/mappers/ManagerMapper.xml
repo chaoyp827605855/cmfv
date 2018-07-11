@@ -2,6 +2,11 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "../mybatis-3-mapper.dtd" >
 <mapper namespace="com.baizhi.cmfv.dao.ManagerMapper">
 
+    <sql id="selectProperty">
+        select m_id , m_name , m_salt , m_status , m_password
+        from t_manager
+    </sql>
+
     <resultMap id="select" type="com.baizhi.cmfv.bean.Manager">
         <id column="m_id" property="id"></id>
         <result column="m_name" property="name"></result>
@@ -10,16 +15,44 @@
         <result column="m_password" property="password"></result>
     </resultMap>
 
+    <select id="selectById" resultMap="select">
+        <include refid="selectProperty" />
+        where m_id = #{id}
+    </select>
+
     <select id="selectByName" resultMap="select">
-        select * from t_manager where m_name = #{name}
+        <include refid="selectProperty" />
+        where m_name = #{name}
     </select>
 
     <select id="selectManager" resultMap="select">
-        select * from t_manager where m_name = #{name} and m_password = #{password}
+        <include refid="selectProperty" />
+        where m_name = #{name} and m_password = #{password}
     </select>
 
     <insert id="insertManager">
         insert into t_manager values (#{id},#{name},#{salt},#{status},#{password})
     </insert>
+    
+    <update id="update" parameterType="java.lang.Boolean">
+        update t_manager
+        <set>
+            <if test="name != null and name != ''">
+                m_name = #{name},
+            </if>
+            <if test="salt != null and salt != ''">
+                m_salt = #{salt},
+            </if>
+            <if test="status != null and status != ''">
+                m_status = #{status},
+            </if>
+            <if test="password != null and password != ''">
+                m_password = #{password}
+            </if>
+        </set>
+        <where>
+            m_id = #{id}
+        </where>
+    </update>
 
 </mapper>

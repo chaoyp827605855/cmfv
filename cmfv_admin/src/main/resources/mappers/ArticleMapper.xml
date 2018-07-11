@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "../mybatis-3-mapper.dtd" >
+<mapper namespace="com.baizhi.cmfv.dao.ArticleMapper">
+
+    <resultMap id="selectArticle" type="Article">
+        <id property="id" column="a_id"></id>
+        <result property="name" column="a_name"></result>
+        <result property="introduce" column="a_introduce"></result>
+        <result property="date" column="a_date"></result>
+        <result property="picture" column="a_picture"></result>
+        <association property="guru" javaType="Guru">
+            <id property="id" column="g_id"></id>
+            <result property="religionName" column="g_religionName"></result>
+            <result property="picture" column="g_picture"></result>
+            <result property="description" column="t_description"></result>
+        </association>
+    </resultMap>
+
+
+    <insert id="insert">
+        insert into t_article values (#{id},#{name},#{introduce},#{date},#{picture},#{guru.id})
+    </insert>
+
+
+    <select id="selectAll" resultMap="selectArticle">
+        SELECT  *
+        FROM t_article a
+        LEFT JOIN t_guru g ON a.g_id = g.g_id
+    </select>
+
+</mapper>

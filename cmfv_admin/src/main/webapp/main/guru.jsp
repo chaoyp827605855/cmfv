@@ -21,7 +21,6 @@
             fitColumns:true,
             fit:true,
             pagination:true,
-            singleSelect:true,
             pageSize:3,
             pageList:[3,5,7,9,11],
             toolbar:"#searchGuru",
@@ -41,9 +40,9 @@
         });
 //----------------------------------------------------------------------------------------------------------
         $("#addGuru").linkbutton({
-            text:"添加",
+            text:"添加上师",
             iconCls: 'icon-add',
-            width:80,
+            width:120,
             height:30,
             onClick: function(){
                 /* alert('添加');*/
@@ -90,9 +89,9 @@
         });
 //----------------------------------------------------------------------------------------------------------
         $("#deleteGuru").linkbutton({
-            text:"删除",
+            text:"删除上师",
             iconCls: 'icon-cancel',
-            width:80,
+            width:120,
             height:30,
             onClick: function(){
                 /*  alert('删除');*/
@@ -115,9 +114,9 @@
         });
 //----------------------------------------------------------------------------------------------------------
         $("#updateGuru").linkbutton({
-            text:"修改",
+            text:"修改上师",
             iconCls: 'icon-edit',
-            width:80,
+            width:120,
             height:30,
             onClick: function(){
                 var rowData = $("#DataGridViewGuru").datagrid("getSelected");
@@ -157,9 +156,7 @@
                         },{
                             text:'关闭',
                             handler:function(){
-                                $("#dialogGuru").dialog("close",{
-
-                                });
+                                $("#dialogGuru").dialog("close",{});
                             }
                         }],
                         onLoad:function(){
@@ -173,23 +170,6 @@
 
             }
         });
-//----------------------------------------------------------------------------------------------------------
-        $('#ssGuru').searchbox({
-            searcher:function(value,name){
-                /*   alert(value + "," + name)*/
-                $("#DataGridViewGuru").datagrid({
-                    url:"${pageContext.request.contextPath}/guru/showGuruPage"
-                }),
-                    $("#DataGridViewGuru").datagrid("load",{
-                        "key":name,
-                        "value":value
-                    })
-            },
-            menu:'#mmGuru',
-            prompt:'请输入值',
-            width:300,
-            height:30
-        });//searchbox
 //----------------------------------------------------------------------------------------------------------
         $("#batchAddGuru").linkbutton({
             text:"批量添加",
@@ -211,7 +191,7 @@
                         text:'提交',
                         handler:function(){
                             $("#excelForm").form("submit",{
-                                url:"${pageContext.request.contextPath}/guru/ajaxUpload",
+                                url:"${pageContext.request.contextPath}/guru/improtExcel",
                                 onSubmit: function(){
                                     //验证表单
                                     var isValid = $(this).form('validate');
@@ -237,6 +217,24 @@
                 });
             }
         });
+//----------------------------------------------------------------------------------------------------------
+        $('#ssGuru').searchbox({
+            searcher:function(value,name){
+                /*   alert(value + "," + name)*/
+                $("#DataGridViewGuru").datagrid({
+                    url:"${pageContext.request.contextPath}/guru/showGuruPage"
+                }),
+                    $("#DataGridViewGuru").datagrid("load",{
+                        "key":name,
+                        "value":value
+                    })
+            },
+            menu:'#mmGuru',
+            prompt:'请输入值',
+            width:300,
+            height:30
+        });//searchbox
+
     })
 
 </script>
@@ -250,12 +248,12 @@
     <a id="addGuru"></a>
     <a id="deleteGuru"></a>
     <a id="updateGuru"></a>
-
+    <a id="batchAddGuru"></a>
+    <a class="easyui-linkbutton" href="${pageContext.request.contextPath}/guru/exportExcel" data-options="text:'导出文件',iconCls: 'icon-edit',width:120,height:30,"></a>
     <input id="ssGuru"></input>
-    <div id="mmGuru" style="width:120px">
+    <div id="mmGuru" st/yle="width:120px">
         <div data-options="name:'religionName'">上师法名</div>
     </div>
-    <a id="batchAddGuru"></a>
 </div>
 
 <div id="dialogGuru"></div>

@@ -1,5 +1,6 @@
 package com.baizhi.cmfv.bean;
 
+import cn.afterturn.easypoi.excel.annotation.Excel;
 import org.springframework.stereotype.Component;
 
 import java.io.Serializable;
@@ -9,9 +10,14 @@ import java.io.Serializable;
  */
 public class Guru implements Serializable {
 
+    // easypoi  @Excel 指定excel表格中列和属性的映射关系
+    @Excel(name="上师编号")
     private String  id;
+    @Excel(name="上师法名")
     private String  religionName;   //法名
+    @Excel(name="上师头像")
     private String  picture;
+    @Excel(name="上师描述")
     private String  description;    //描述
 
     @Override

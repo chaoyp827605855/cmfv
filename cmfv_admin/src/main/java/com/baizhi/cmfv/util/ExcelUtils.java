@@ -19,7 +19,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 /**
  * @ClassName ExcelUtils
- * @Description 类的作用
+ * @Description 运用POI 实现 excel表格中的数据导入、导出
  * @Author Chao
  * @Date 2018/7/7 19:38
  */

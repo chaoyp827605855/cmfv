@@ -19,7 +19,6 @@
             fitColumns:true,
             fit:true,
             pagination:true,
-            singleSelect:true,
             pageSize:3,
             pageList:[3,5,7,9,11],
             toolbar:"#searchSlideshow",

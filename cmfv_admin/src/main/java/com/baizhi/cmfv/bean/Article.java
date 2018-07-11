@@ -1,5 +1,6 @@
 package com.baizhi.cmfv.bean;
 
+import com.alibaba.fastjson.annotation.JSONField;
 import org.springframework.stereotype.Component;
 
 import java.io.Serializable;
@@ -13,9 +14,11 @@ public class Article implements Serializable {
     private String  id;
     private String  name;
     private String  introduce;
+    @JSONField(format = "yyyy-MM-dd hh:mm:ss")
     private Date    date;
     private String  picture;
-    private String  gid;
+    private Guru guru;
+
 
     @Override
     public String toString() {
@@ -25,7 +28,7 @@ public class Article implements Serializable {
                 ", introduce='" + introduce + '\'' +
                 ", date=" + date +
                 ", picture='" + picture + '\'' +
-                ", gid='" + gid + '\'' +
+                ", guru=" + guru +
                 '}';
     }
 
@@ -69,11 +72,11 @@ public class Article implements Serializable {
         this.picture = picture;
     }
 
-    public String getGid() {
-        return gid;
+    public Guru getGuru() {
+        return guru;
     }
 
-    public void setGid(String gid) {
-        this.gid = gid;
+    public void setGuru(Guru guru) {
+        this.guru = guru;
     }
 }

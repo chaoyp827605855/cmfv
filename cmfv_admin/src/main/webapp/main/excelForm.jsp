@@ -19,12 +19,11 @@
 <%--<div>1.通过简单的form表单提交方式，进行文件的上</br> 2.通过jquery.form.js插件提供的form表单一步提交功能 </div></br>--%>
 <form id="excelForm" method="POST"  enctype="multipart/form-data">
     <table>
-        <div style="margin-left: 40px;">
-            <label for="description">上师简介:</label>
-            <input class="easyui-textbox" prompt="description" name="description"  style="width:300px;height:40px;">
+        <div style="margin-left: 40px;margin-top: 50px;">
+            <label for="Excel"><h3>请选择相应的Excel表格文件 : </h3></label>
         </div>
 
-        <div style="margin-left: 40px;">
+        <div style="margin-left: 40px;margin-top: 50px;">
             <label for="upfile">上传文件:</label>
             <input class="easyui-filebox" data-options="required:true" name="upfile"  style="width:300px;height:40px;">
         </div>
