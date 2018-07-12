@@ -78,17 +78,18 @@
     </script>
 
     <%-- 为coookie中的中文 解码 ， 并取出 --%>
-    <%
-        String name = "";
-        javax.servlet.http.Cookie cs[] = request.getCookies();
-        for(javax.servlet.http.Cookie c:cs){
-            if(c.getName().equals("name")){
-                name = c.getValue();
-                name = java.net.URLDecoder.decode(name,"utf-8");
-            }
-        }
-    %>
-
+    <%--
+   <%
+       String name = "";
+       javax.servlet.http.Cookie cs[] = request.getCookies();
+       for(javax.servlet.http.Cookie c:cs){
+           if(c.getName().equals("name")){
+               name = c.getValue();
+               name = java.net.URLDecoder.decode(name,"utf-8");
+           }
+       }
+   %>
+   --%>
 </head>
 <body>
 
@@ -104,7 +105,7 @@
                     用户名:
                 </th>
                 <td>
-                    <input id="mName" type="text"  name="name" class="text" value="<%=name%>" maxlength="20"/>
+                    <input id="mName" type="text"  name="name" class="text" value="" maxlength="20"/>
                 </td>
             </tr>
             <tr>

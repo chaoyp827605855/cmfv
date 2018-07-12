@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
+<%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
 <body>
 <script type="application/javascript">
 
@@ -88,6 +89,7 @@
             }
         });
 //----------------------------------------------------------------------------------------------------------
+        <shiro:hasPermission name="guru:remove">
         $("#deleteGuru").linkbutton({
             text:"删除上师",
             iconCls: 'icon-cancel',
@@ -112,7 +114,9 @@
 
             }
         });
+        </shiro:hasPermission>
 //----------------------------------------------------------------------------------------------------------
+        <shiro:hasPermission name="guru:modify">
         $("#updateGuru").linkbutton({
             text:"修改上师",
             iconCls: 'icon-edit',
@@ -170,6 +174,7 @@
 
             }
         });
+        </shiro:hasPermission>
 //----------------------------------------------------------------------------------------------------------
         $("#batchAddGuru").linkbutton({
             text:"批量添加",
