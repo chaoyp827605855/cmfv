@@ -44,5 +44,76 @@
     <!-- 使用aspectj 风格的aop -->
     <aop:aspectj-autoproxy></aop:aspectj-autoproxy>
 
+
+
+
+    <!-- shiro的过滤器工厂的对象     负责权限的校验     处理请求的bean  -->
+    <bean id="ShiroFilterFactoryBean" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+        <property name="securityManager" ref="securityManager"></property>
+        <!--  登录页的url地址  -->
+        <property name="loginUrl" value="/jsp/login.jsp"></property>
+        <property name="unauthorizedUrl" value="/jsp/error.jsp"></property>
+        <!--    定义过滤器链的拦截规则    -->
+        <property name="filterChainDefinitions">
+            <!--
+                过滤器 : anon | authc | user | logout | roles | perms
+            -->
+            <value>
+                /manager/login=anon
+                /verifCode=anon
+                /verification=anon
+                /js/**=anon
+                /css/**=anon
+                /img/**=anon
+                /script/**=anon
+                /themes/**=anon
+                /main/main.jsp=user
+                /**=user
+            </value>
+        </property>
+    </bean>
+
+    <!--  初始化web环境下的安全管理器  -->
+    <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+        <property name="realms">
+            <list>
+                <ref bean="myRealm"></ref>
+            </list>
+        </property>
+        <!-- 记住我管理器  实现免登录 -->
+        <property name="rememberMeManager" ref="rememberMeManager"></property>
+
+        <!-- 缓存管理器 -->
+        <property name="cacheManager" ref="ehCacheManager"></property>
+    </bean>
+    <!--
+        ehCache缓存框架    一般适用于本地缓存
+     -->
+    <bean id="ehCacheManager" class="org.apache.shiro.cache.ehcache.EhCacheManager">
+        <!-- classpath:ehcache.xml配置缓存文件 -->
+        <property name="cacheManagerConfigFile" value="classpath:ehcache.xml"></property>
+    </bean>
+
+    <!-- 声明记住我管理器 -->
+    <bean id="rememberMeManager" class="org.apache.shiro.web.mgt.CookieRememberMeManager">
+        <property name="cookie" ref="simpleCookie"></property>
+    </bean>
+    <bean id="simpleCookie" class="org.apache.shiro.web.servlet.SimpleCookie">
+        <property name="name" value="rm"></property>
+        <property name="maxAge" value="604800"></property>
+        <property name="path" value="/"></property>
+    </bean>
+
+    <bean id="myRealm" class="com.baizhi.cmfv.util.MyRealm">
+        <property name="credentialsMatcher" ref="credentialsMatcher"></property>
+    </bean>
+
+    <!-- 基于散列加密 声明复杂的凭证匹配器对象-->
+    <bean id="credentialsMatcher" class="org.apache.shiro.authc.credential.HashedCredentialsMatcher">
+        <property name="hashAlgorithmName" value="md5"></property>
+        <property name="hashIterations" value="512"></property>
+    </bean>
+
+
 </beans>
 
